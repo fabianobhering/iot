@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
 <body>
 
 <h1>T&iacute;tulo 1</h1>
@@ -31,7 +34,7 @@
     <th>Coluna 3</th>
   </tr>
   <tr>
-    <td align=right >11</td>
+    <td id="sensor" align=right >0</td>
     <td align=right>12</td> 
     <td align=right>13</td>
   </tr>
@@ -41,8 +44,44 @@
     <td align=right>23</td>
   </tr>
 </table>
-
+<div id="chart"></div>
 <p><a href="js/ex_js.html">Exemplo JavaScript</p>
 <p><a href="ex_js.html">Exemplo JavaScript</p>
 </body>
+<script>
+function rand() {
+	  return Math.floor(Math.random() * (30 - 20)) + 20;
+	}
+
+
+	var time = new Date();
+	var valor = rand();
+	var data = [{
+	  x: [time],
+	  y: [valor],
+	  mode: 'lines',
+	  line: {color: '#80CAF6'}
+	}]
+
+	var temperatura = document.getElementById('chart');
+	Plotly.plot(temperatura, data);
+
+	var cnt = 0;
+
+	var interval = setInterval(function() {
+
+	  var time = new Date();
+	  var valor = rand();
+	  var update = {
+	  x:  [[time]],
+	  y: [[valor]]
+	  }
+
+	  document.getElementById("sensor").innerHTML = valor;
+	  Plotly.extendTraces(temperatura, update, [0])
+	
+	  if(cnt === 100) clearInterval(interval);
+	}, 1000);
+
+</script>
 </html>
