@@ -74,7 +74,7 @@ router.route('/temperatura')
 	});
 });
 
-router.route('/temperatura')
+router.route('/temperatura2')
 
 /* 2) Método: Selecionar Todos (acessar em: GET http://locahost:8080/api/usuarios) */
 .get(function(req, res) {
@@ -87,6 +87,32 @@ router.route('/temperatura')
 		res.json(temperatura);
 	});
 });
+
+
+
+var qpm = require('query-params-mongo');
+
+var processQuery = qpm({
+    autoDetect: [{ fieldPattern: /_id$/, dataType: 'objectId' }],
+    converters: {objectId: mongodb.ObjectID}
+});
+app.get('/temperatura', function(req, res) {
+    try {
+        var query = processQuery(req.query, 
+            {name: {dataType: 'string', required: false}},
+            true
+        );
+    } catch (errors) {
+        res.status(500).send(errors);
+    }
+    
+     Temperatura.find(query.filter)
+                .sort(query.sort).skip(query.offset).limit(query.limit);
+        
+   
+});
+
+
 
 //Rotas que irão terminar em '/usuarios/:usuario_id' - (servem tanto para GET by Id, PUT, & DELETE)
 router.route('/temperatura/:id')
