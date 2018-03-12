@@ -88,29 +88,21 @@ router.route('/temperatura')
 	});
 });
 
+router.route('/temperatura2')
 
-var mongodb = require('mongodb');
-var qpm = require('query-params-mongo');
+.get(function(req, res) {
 
-var processQuery = qpm({
-    autoDetect: [{ fieldPattern: /_id$/, dataType: 'objectId' }],
-    converters: {objectId: mongodb.ObjectID}
+	//Função para Selecionar Todos as temperaturas' e verificar se há algum erro:
+	Temperatura.apiQuery(req.query, function(err, temperatura) {
+		if (err)
+			res.send(err);
+
+		res.json(temperatura);
+	});
 });
-app.get('/temperatura', function(req, res) {
-    try {
-        var query = processQuery(req.query, 
-            {time: {dataType: 'string', required: false}},
-            true
-        );
-    } catch (errors) {
-        res.status(500).send(errors);
-    }
-    
-     Temperatura.find(query.filter)
-                .sort(query.sort).skip(query.offset).limit(query.limit);
-        
-   
-});
+
+
+
 
 
 

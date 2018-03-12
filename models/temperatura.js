@@ -14,6 +14,9 @@ var TemperaturaSchema = new Schema({
     time: String,
     valor: String
 });
+
+TemperaturaSchema.plugin(mongooseApiQuery);
+
 autoIncrement.initialize(mongoose.connection);
 TemperaturaSchema.plugin(autoIncrement.plugin, 'temperatura');
  
