@@ -89,7 +89,7 @@ router.route('/temperatura2')
 });
 
 
-
+var mongodb = require('mongodb');
 var qpm = require('query-params-mongo');
 
 var processQuery = qpm({
