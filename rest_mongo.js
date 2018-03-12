@@ -113,7 +113,7 @@ var processQuery = qpm({
 app.get('/temperatura3', function(req, res) {
     try {
         var query = processQuery(req.query, 
-            {name: {dataType: 'string', required: false}},
+            {time: {dataType: 'string', required: false}},
             true
         );
     } catch (errors) {
