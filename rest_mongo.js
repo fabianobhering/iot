@@ -74,7 +74,7 @@ router.route('/temperatura')
 	});
 });
 
-router.route('/temperatura2')
+router.route('/temperatura')
 
 /* 2) Método: Selecionar Todos (acessar em: GET http://locahost:8080/api/usuarios) */
 .get(function(req, res) {
@@ -99,7 +99,7 @@ var processQuery = qpm({
 app.get('/temperatura', function(req, res) {
     try {
         var query = processQuery(req.query, 
-            {name: {dataType: 'string', required: false}},
+            {time: {dataType: 'string', required: false}},
             true
         );
     } catch (errors) {
