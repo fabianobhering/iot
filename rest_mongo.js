@@ -102,6 +102,35 @@ router.route('/temperatura2')
 });
 
 
+var qpm = require('query-params-mongo');
+var mongodb = require('mongodb');
+
+var processQuery = qpm({
+    autoDetect: [{ fieldPattern: /_id$/, dataType: 'objectId' }],
+    converters: {objectId: mongodb.ObjectID}
+});
+
+app.get('/temperatura3', function(req, res) {
+    try {
+        var query = processQuery(req.query, 
+            {name: {dataType: 'string', required: false}},
+            true
+        );
+    } catch (errors) {
+        res.status(500).send(errors);
+    }
+    
+   
+         Temperatura.find(query.filter, function(err, temperatura) {
+    		if (err)
+    			res.send(err);
+
+    		res.json(temperatura);
+    	}).sort(query.sort).skip(query.offset).limit(query.limit);
+       
+   
+});
+
 
 
 
