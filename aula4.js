@@ -24,7 +24,7 @@ app.use(bodyParser.json()); // configurações do body parser
 
 /* Rota para acompanhar as requisições */
 router.use(function(req, res, next) {
-	console.log('Entrou na rota.');
+	console.log('Entrou na rota ');
 	next(); // continua na próxima rota
 });
 
@@ -43,6 +43,7 @@ router.route('/temperatura').get(function(req, res) {
 
 		res.json(temperatura);
 	});
+	console.log('GET /temperatura');
 });
 
 //GET /temperatura/:id
@@ -53,6 +54,7 @@ router.route('/temperatura/:id').get(function(req, res) {
 
 		res.json(temperatura);
 	});
+	console.log('GET /temperatura/:id');
 });
 
 /* POST /temperatura {time:"..",valor:"..."} */
@@ -70,6 +72,7 @@ router.route('/temperatura').post(function(req, res) {
 			message : 'temperatura criada!'
 		});
 	});
+	console.log('POST /temperatura');
 });
 
 //PUT /temperatura/:id {time:"..",valor:"..."}
@@ -87,6 +90,7 @@ router.route('/temperatura/:id').put(function(req, res) {
 			res.json({ message: 'Temperatura Atualizado!' });
 		});
 	});
+	console.log('PUT /temperatura/:id');
 });
 
 //DELETE /temperatura/:id
@@ -98,6 +102,7 @@ router.route('/temperatura/:id').delete(function(req, res) {
 			res.send(error);
 		res.json({ message: 'Temperatura excluída com Sucesso! '});
 	});
+	console.log('DELETE /temperatura/:id');
 });
 
 app.use('/', router);
