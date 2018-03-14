@@ -1,9 +1,7 @@
-/**
- * Arquivo: usuario.js
- * Author: Glaucia Lemos
- * Description: Arquivo onde trataremos o modelo do projeto.
- * Definição dos esquemas para serem utilizadas na Base de Dados (MongoDb)
- * Data: 13/10/2016
+/** Pós Graduação Internet das Coisas - CEFET-MG
+	Disciplina: Programação para Sistemas de Computação
+	Exemplo prático de RESTFul com NodeJS e MongoDB
+	Modelo Temperatura
  */
  
 var mongoose = require('mongoose');
@@ -15,8 +13,6 @@ var TemperaturaSchema = new Schema({
     time: String,
     valor: String
 });
-
-
 
 autoIncrement.initialize(mongoose.connection);
 TemperaturaSchema.plugin(autoIncrement.plugin, 'temperatura');
