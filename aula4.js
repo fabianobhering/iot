@@ -7,7 +7,7 @@
 var express = require('express'); 
 var cors = require('cors'); 
 var bodyParser = require('body-parser'); 
-var Temperatura = require('model_temperatura'); // Modelos definidos
+var Temperatura = require('modelTemperatura'); // Modelos definidos
 var mongoose = require('mongoose');
 
 var url = "mongodb://localhost:27017/sensor";
