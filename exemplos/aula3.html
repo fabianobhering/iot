@@ -84,8 +84,14 @@
 
 					Plotly.newPlot(chart, charData);
 				};
+				
+				setInterval(function() {
+
+					$scope.GetData();
+					}, 1000);
 
 			});
+	
 </script>
 </head>
 
