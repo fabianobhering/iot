@@ -98,15 +98,16 @@ router.route('/temperatura').post(function(req, res) {
 	temperatura.valor = req.body.valor;
 
 	temperatura.save(function(error) {
-		if (error)
+		if (error){
 			res.send(error);
-
-		res.json({
-			message : 'temperatura criada!'
-		});
+		}else{
+			res.json({
+				message : 'temperatura criada!'
+			});
+			client.publish('iot-cefetmg', temperatura.valor.toString()); //MQTT: publica o valor da temperatura no Tópico
+		}
 	});
 	
-	client.publish('iot-cefetmg', temperatura.valor); //MQTT: publica o valor da temperatura no Tópico
 	
 	console.log('POST /temperatura');
 });
