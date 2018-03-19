@@ -41,7 +41,13 @@ client.on('message', function (topic, message) { //aguarda mensagem do tópico a
 	  
 	  var temperatura = new Temperatura();
 
-	  temperatura.time = "2018";
+	  var d = new Date();
+	 
+	  temperatura.time = d.getFullYear() + "-"
+		+ ("00" + (d.getMonth() + 1)).slice(-2) + "-"
+		+ ("00" + (d.getDate())).slice(-2) + " "
+		+ d.toLocaleTimeString();
+	 
 	  temperatura.valor = payload;
 
 		temperatura.save(function(error) {
