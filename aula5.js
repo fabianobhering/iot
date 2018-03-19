@@ -54,8 +54,6 @@ client.on('message', function (topic, message) { //aguarda mensagem do tópico a
 	
 });
 
-
-
 /* Rota para acompanhar as requisições */
 router.use(function(req, res, next) {
 	console.log('Entrou na rota ');
@@ -72,6 +70,17 @@ router.get('/', function(req, res) {
 //GET /temperatura
 router.route('/temperatura').get(function(req, res) {
 	Temperatura.find(function(err, temperatura) {
+		if (err)
+			res.send(err);
+
+		res.json(temperatura);
+	});
+	console.log('GET /temperatura');
+});
+
+//GET /temperatura/q
+router.route('/temperatura/q').get(function(req, res) {
+	Temperatura.ApiQuery(function(err, temperatura) {
 		if (err)
 			res.send(err);
 
