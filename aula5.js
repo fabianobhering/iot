@@ -25,7 +25,7 @@ app.use(bodyParser.json()); // configurações do body parser
 
 
 
-var client     = mqtt.connect('tcp://iot.eclipse.org'); //inicia o mqtt
+var client     = mqtt.connect('tcp://35.199.76.183'); //inicia o mqtt
 
 
 client.on('connect', function () {
