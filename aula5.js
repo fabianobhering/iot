@@ -11,8 +11,8 @@ var Temperatura = require('./models/temperatura'); // Modelos definidos
 var mongoose = require('mongoose');
 var mqtt = require('mqtt');
 
-var url = "mongodb://localhost:27017/sensor";
-mongoose.connect(url);
+mongoose.connect("mongodb://localhost:27017/sensor");
+var client = mqtt.connect('tcp://localhost'); //inicia o mqtt
 
 var app = express(); // Cria o app com Express
 var router = express.Router();
@@ -23,17 +23,12 @@ app.use(bodyParser.urlencoded({
 })); 
 app.use(bodyParser.json()); // configurações do body parser
 
-
-
-var client     = mqtt.connect('tcp://35.199.76.183'); //inicia o mqtt
-
-
 client.on('connect', function () {
-   	 client.subscribe('iot-cefetmg'); //conecta e assina o tópico
+   	 client.subscribe('iot-cefetmg'); //conecta e assina o tópico MQTT
 });
 
 
-client.on('message', function (topic, message) { //aguarda mensagem do tópico assinado e insere no db
+client.on('message', function (topic, message) { //aguarda mensagem do tópico assinado MQTT 
 	  console.log(topic.toString());
 	  console.log(message.toString());
 	  var payload       = message.toString();
@@ -50,7 +45,7 @@ client.on('message', function (topic, message) { //aguarda mensagem do tópico a
 	 
 	  temperatura.valor = payload;
 
-		temperatura.save(function(error) {
+		temperatura.save(function(error) { // insere no db
 			if (error)
 				console.log(error);
 
