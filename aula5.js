@@ -24,18 +24,16 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json()); // configurações do body parser
 
 
-//Initialize the mqtt client
-var client     = mqtt.connect('tcp://iot.eclipse.org');
 
-// MQTT onConnect function
+var client     = mqtt.connect('tcp://iot.eclipse.org'); //inicia o mqtt
+
+
 client.on('connect', function () {
-   	 client.subscribe('zuhry');
-     client.publish('zuhry', 'Hello Zuhry');
+   	 client.subscribe('iot-cefetmg'); //conecta e assina o tópico
 });
 
-//MQTT message callback function
-client.on('message', function (topic, message) {
-      // message is Buffer convert to String 
+
+client.on('message', function (topic, message) { //aguarda mensagem do tópico assinado e insere no db
 	  console.log(topic.toString());
 	  console.log(message.toString());
 	  var payload       = message.toString();
@@ -107,6 +105,9 @@ router.route('/temperatura').post(function(req, res) {
 			message : 'temperatura criada!'
 		});
 	});
+	
+	client.publish('iot-cefetmg', temperatura.valor); //MQTT: publica o valor da temperatura no Tópico
+	
 	console.log('POST /temperatura');
 });
 
