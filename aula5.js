@@ -80,7 +80,7 @@ router.route('/temperatura').get(function(req, res) {
 
 //GET /temperatura/q
 router.route('/temperatura/q').get(function(req, res) {
-	Temperatura.ApiQuery(function(err, temperatura) {
+	Temperatura.apiQuery(req.query).exec(function(err, temperatura) {
 		if (err)
 			res.send(err);
 
