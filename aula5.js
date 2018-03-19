@@ -81,6 +81,7 @@ router.route('/temperatura').get(function(req, res) {
 //GET /temperatura/q
 router.route('/temperatura/q').get(function(req, res) {
 	Temperatura.apiQuery(req.query).exec(function(err, temperatura) {
+		console.log(req.query);
 		if (err)
 			res.send(err);
 
