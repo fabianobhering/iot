@@ -108,13 +108,13 @@ router.route('/temperatura/q').get(function(req, res) {
 		.find()
 		.filter(filter)
 		.order(sort)
-		.page(pagination, function(err, customers) {
+		.page(pagination, function(err, temperatura) {
 			if (err) {
 				return res.send(400, {
 					message: getErrorMessage(err)
 				});
 			} else {
-				res.json(customers);
+				res.jsonp(temperatura);
 			}
 		});
 	console.log('GET /temperatura');
