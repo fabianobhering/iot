@@ -11,6 +11,8 @@ var Temperatura = require('./models/temperatura'); // Modelos definidos
 var mongoose = require('mongoose');
 var mqtt = require('mqtt');
 
+require('mongoose-middleware').initialize(mongoose);
+
 mongoose.connect("mongodb://localhost:27017/sensor");
 var client = mqtt.connect('tcp://localhost'); //inicia o mqtt
 
