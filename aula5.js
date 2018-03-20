@@ -95,7 +95,7 @@ router.route('/lerTemperatura/').get(function(req, res) {
 		if (err)
 			res.send(err);
 
-		res.json(temperatura.valor);
+		res.json(temperatura);
 	});
 });
 
