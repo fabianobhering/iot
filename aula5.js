@@ -80,14 +80,41 @@ router.route('/temperatura').get(function(req, res) {
 
 //GET /temperatura/q
 router.route('/temperatura/q').get(function(req, res) {
-	var params = req.query;
-	Temperatura.find(params.q,function(err, temperatura) {
-		
-		if (err)
-			res.send(err);
-
-		res.json(temperatura);
-	}).sort({ _id: 1 }).limit(1);
+	var count = req.query.count || 5;
+	var page = req.query.page || 1;
+ 
+	var filter = {
+		filters: {
+			mandatory: {
+				contains: req.query.filter
+			}
+		}
+	};
+ 
+	var pagination = {
+		start: (page - 1) * count,
+		count: count
+	};
+ 
+	var sort = {
+		sort: {
+			desc: '_id'
+		}
+	};
+ 
+	Temperatura
+		.find()
+		.filter(filter)
+		.order(sort)
+		.page(pagination, function(err, customers) {
+			if (err) {
+				return res.send(400, {
+					message: getErrorMessage(err)
+				});
+			} else {
+				res.json(customers);
+			}
+		});
 	console.log('GET /temperatura');
 });
 
