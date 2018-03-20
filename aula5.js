@@ -92,7 +92,7 @@ router.route('/lerTemperatura/').get(function(req, res) {
 	find().
 	where({ valor: valor }).
 	limit(limit).
-	sort({ sort: -1 })
+	sort({ sort: order })
 	.exec(function(err, temperatura) {
 		if (err)
 			res.send(err);
