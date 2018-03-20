@@ -106,7 +106,9 @@ router.route('/temperatura/q').get(function(req, res) {
  
 	Temperatura
 		.find()
-		.limit(1, function(err, temperatura) {
+		.filter(filter)
+		.order(sort)
+		.page(pagination, function(err, temperatura) {
 			if (err) {
 				return res.send(400, {
 					message: getErrorMessage(err)
@@ -117,6 +119,26 @@ router.route('/temperatura/q').get(function(req, res) {
 		});
 	console.log('GET /temperatura/q');
 });
+
+//GET /temperatura
+router.route('/temperatura').get(function(req, res) {
+	var query = Temperatura.
+	find().
+	limit(10).
+	sort({ _id: -1 });
+	
+	query.exec(function(err, temperatura) {
+		if (err)
+			res.send(err);
+
+		res.json(temperatura);
+	});
+});
+
+
+
+
+
 
 //GET /temperatura/:id
 router.route('/temperatura/:id').get(function(req, res) {
