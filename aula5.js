@@ -80,51 +80,13 @@ router.route('/temperatura').get(function(req, res) {
 	console.log('GET /temperatura');
 });
 
-//GET /temperatura/q
-router.route('/temperatura/q').get(function(req, res) {
-	var count = req.query.count || 5;
-	var page = req.query.page || 1;
- 
-	var filter = {
-		filters: {
-			mandatory: {
-				contains: req.query.filter
-			}
-		}
-	};
- 
-	var pagination = {
-		start: (page - 1) * count,
-		count: count
-	};
- 
-	var sort = {
-		sort: {
-			desc: '_id'
-		}
-	};
- 
-	Temperatura
-		.find()
-		.filter(filter)
-		.order(sort)
-		.page(pagination, function(err, temperatura) {
-			if (err) {
-				return res.send(400, {
-					message: getErrorMessage(err)
-				});
-			} else {
-				res.json(temperatura);
-			}
-		});
-	console.log('GET /temperatura/q');
-});
+
 
 //GET /temperatura
-router.route('/temperatura/q1').get(function(req, res) {
+router.route('/temperatura/q').get(function(req, res) {
 	var query = Temperatura.
 	find().
-	limit(10).
+	limit(req.query._limit).
 	sort({ _id: -1 });
 	
 	query.exec(function(err, temperatura) {
@@ -134,11 +96,6 @@ router.route('/temperatura/q1').get(function(req, res) {
 		res.json(temperatura);
 	});
 });
-
-
-
-
-
 
 //GET /temperatura/:id
 router.route('/temperatura/:id').get(function(req, res) {
