@@ -106,18 +106,16 @@ router.route('/temperatura/q').get(function(req, res) {
  
 	Temperatura
 		.find()
-		.filter(filter)
-		.order(sort)
-		.page(pagination, function(err, temperatura) {
+		.limit(1, function(err, temperatura) {
 			if (err) {
 				return res.send(400, {
 					message: getErrorMessage(err)
 				});
 			} else {
-				res.jsonp(temperatura);
+				res.json(temperatura);
 			}
 		});
-	console.log('GET /temperatura');
+	console.log('GET /temperatura/q');
 });
 
 //GET /temperatura/:id
