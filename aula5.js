@@ -69,24 +69,12 @@ router.get('/', function(req, res) {
 
 //GET /temperatura
 router.route('/temperatura').get(function(req, res) {
-	 if(req.params == null){
 	Temperatura.find(function(err, temperatura) {
 		if (err)
 			res.send(err);
 
 		res.json(temperatura);
 	});
-	
-	}else{
-		
-		var valor = req.params.valor;
-		Temperatura.find({"valor": new RegExp('/'+valor+'/i') },function(err,data){
-			if (err)
-				res.send(err);
-
-			res.json(temperatura);
-		});
-	}
 	console.log('GET /temperatura');
 });
 
@@ -99,7 +87,7 @@ router.route('/temperatura/q').get(function(req, res) {
 			res.send(err);
 
 		res.json(temperatura);
-	}).sort({ _id: -1 }).limit(1);
+	}).sort({ _id: 1 }).limit(1);
 	console.log('GET /temperatura');
 });
 
