@@ -83,17 +83,19 @@ router.route('/temperatura').get(function(req, res) {
 
 
 //GET /temperatura
-router.route('/temperatura/q').get(function(req, res) {
-
+router.route('/lerTemperatura/').get(function(req, res) {
+	var limit = parseInt(req.query._limit) || 1;
+	
 	Temperatura.
 	find().
-	limit(parseInt(req.query._limit)).
+	where('valor').gte(21).
+	limit(limit).
 	sort({ _id: -1 })
 	.exec(function(err, temperatura) {
 		if (err)
 			res.send(err);
 
-		res.json(temperatura);
+		res.json(temperatura.valor);
 	});
 });
 
