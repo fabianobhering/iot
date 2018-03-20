@@ -68,7 +68,7 @@ router.get('/', function(req, res) {
 });
 
 //GET /temperatura
-router.route('/temperatura/:q').get(function(req, res) {
+router.route('/temperatura').get(function(req, res) {
 	 if(req.params == null){
 	Temperatura.find(function(err, temperatura) {
 		if (err)
