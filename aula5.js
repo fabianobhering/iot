@@ -86,7 +86,8 @@ router.route('/temperatura').get(function(req, res) {
 router.route('/lerTemperatura/').get(function(req, res) {
 	var limit = parseInt(req.query._limit) || 1;
 	var valor = req.query.valor;
-	var sort = req.query._sort || _id;
+	var sort = req.query._sort || "_id";
+	var order = parseInt(req.query._order) || -1;
 	Temperatura.
 	find().
 	where({ valor: valor }).
