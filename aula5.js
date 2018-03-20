@@ -121,7 +121,7 @@ router.route('/temperatura/q').get(function(req, res) {
 });
 
 //GET /temperatura
-router.route('/temperatura').get(function(req, res) {
+router.route('/temperatura/q1').get(function(req, res) {
 	var query = Temperatura.
 	find().
 	limit(10).
