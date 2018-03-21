@@ -83,7 +83,7 @@ router.route('/temperatura').get(function(req, res) {
 
 
 //GET /temperatura
-router.route('/lerTemperatura/').get(function(req, res) {
+router.route('/temperatura/q').get(function(req, res) {
 	var limit = parseInt(req.query._limit) || 1;
 	var valor = req.query.valor || {$gte: 0};
 	var order = parseInt(req.query._order) || -1;
