@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json()); // configurações do body parser
 
 client.on('connect', function () {
-   	 client.subscribe('iot-cefetmg'); //conecta e assina o tópico MQTT
+   	 client.subscribe('topic-iot-cefetmg'); //conecta e assina o tópico MQTT
 });
 
 
