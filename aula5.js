@@ -81,8 +81,8 @@ router.get('/', function(req, res) {
 });*/
 
 //GET /temperatura
-router.route('/temperatura/').get(function(req, res) {
-	var limit = parseInt(req.query._limit) || 1;
+router.route('/temperatura').get(function(req, res) {
+	var limit = parseInt(req.query._limit) || 20;
 	var valor = req.query.valor || {$gte: 0};
 	var sort = parseInt(req.query._sort) || -1;
 	Temperatura.
@@ -96,6 +96,7 @@ router.route('/temperatura/').get(function(req, res) {
 
 		res.json(temperatura);
 	});
+	console.log('GET /temperatura');
 });
 
 router.route('/temperatura/q').get(function(req, res) {
@@ -109,7 +110,7 @@ router.route('/temperatura/q').get(function(req, res) {
 });
 
 //GET /temperatura/recente
-router.route('/temperatura/q').get(function(req, res) {
+router.route('/temperatura/recente').get(function(req, res) {
 	var limit =  1;
 	var sort  = -1;
 	Temperatura.
@@ -122,6 +123,7 @@ router.route('/temperatura/q').get(function(req, res) {
 
 		res.json(temperatura);
 	});
+	console.log('GET /temperatura/recente');
 });
 
 //GET /temperatura/elevada
@@ -141,7 +143,7 @@ router.route('/temperatura/elevada').get(function(req, res) {
 
 		res.json(temperatura);
 	});
-    
+    console.log('GET /temperatura/elevada');
 });
 
 
