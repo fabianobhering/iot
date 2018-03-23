@@ -179,18 +179,6 @@ router.route('/temperatura').post(function(req, res) {
 	console.log('POST /temperatura');
 });
 
-/* POST /temperatura/mqtt {valor:"..."} */
-router.route('/temperatura/mqtt').post(function(req, res) {
-	
-	client.publish('topic-iot-cefetmg',  req.body.valor); //MQTT: publica o valor da temperatura no Tópico
-	
-	res.json({
-		message : 'temperatura publicada!'
-	});
-	
-	console.log('POST /temperatura/mqtt');
-});
-
 //PUT /temperatura/:id {time:"..",valor:"..."}
 router.route('/temperatura/:id').put(function(req, res) {
 	Temperatura.findById(req.params.id, function(error, temperatura) {
