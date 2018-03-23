@@ -10,7 +10,7 @@ var autoIncrement = require('mongoose-auto-increment');
 var mongooseApiQuery = require('mongoose-api-query'); 
 
 var TemperaturaSchema = new Schema({
-    time: Date,
+    time: String,
     valor: String
 });
 

@@ -130,7 +130,7 @@ router.route('/temperatura/recente').get(function(req, res) {
 router.route('/temperatura/elevada').get(function(req, res) {
 	var limit = 10;
 	var valor = {$gte: 30};
-	var sort =  1;
+	var sort =  -1;
 	
     Temperatura.
 	find().
