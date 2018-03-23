@@ -70,7 +70,7 @@ router.get('/', function(req, res) {
 });
 
 //GET /temperatura
-router.route('/temperatura').get(function(req, res) {
+/*router.route('/temperatura').get(function(req, res) {
 	Temperatura.find(function(err, temperatura) {
 		if (err)
 			res.send(err);
@@ -78,20 +78,18 @@ router.route('/temperatura').get(function(req, res) {
 		res.json(temperatura);
 	});
 	console.log('GET /temperatura');
-});
-
-
+});*/
 
 //GET /temperatura
-router.route('/temperatura/q').get(function(req, res) {
+router.route('/temperatura/').get(function(req, res) {
 	var limit = parseInt(req.query._limit) || 1;
 	var valor = req.query.valor || {$gte: 0};
-	var order = parseInt(req.query._order) || -1;
+	var sort = parseInt(req.query._sort) || -1;
 	Temperatura.
 	find().
 	where({ valor: valor }).
 	limit(limit).
-	sort({ _id: order })
+	sort({ _id: sort })
 	.exec(function(err, temperatura) {
 		if (err)
 			res.send(err);
@@ -99,6 +97,53 @@ router.route('/temperatura/q').get(function(req, res) {
 		res.json(temperatura);
 	});
 });
+
+router.route('/temperatura/q').get(function(req, res) {
+	Temperatura.apiQuery(req.query).exec(function(err, temperatura) {
+		if (err)
+			res.send(err);
+
+		res.json(temperatura);
+	});
+	console.log('GET /temperatura/q');
+});
+
+//GET /temperatura/recente
+router.route('/temperatura/q').get(function(req, res) {
+	var limit =  1;
+	var sort  = -1;
+	Temperatura.
+	find().
+	limit(limit).
+	sort({ _id: sort })
+	.exec(function(err, temperatura) {
+		if (err)
+			res.send(err);
+
+		res.json(temperatura);
+	});
+});
+
+//GET /temperatura/elevada
+router.route('/temperatura/elevada').get(function(req, res) {
+	var limit = 10;
+	var valor = {$gte: 30};
+	var sort =  1;
+	
+    Temperatura.
+	find().
+	where({ valor: valor }).
+	limit(limit).
+	sort({ _id: sort })
+	.exec(function(err, temperatura) {
+		if (err)
+			res.send(err);
+
+		res.json(temperatura);
+	});
+    
+});
+
 
 //GET /temperatura/:id
 router.route('/temperatura/:id').get(function(req, res) {
